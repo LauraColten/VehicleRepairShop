@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VehicleRepairShop.Models;
 
-namespace VehicleRepairShop.Migrations.VehicleRepairShopIdentity
+namespace VehicleRepairShop.Migrations
 {
-    [DbContext(typeof(VehicleRepairShopIdentityContext))]
-    partial class VehicleRepairShopIdentityContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(VehicleRepairShopContext))]
+    [Migration("20190730235258_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,8 +142,6 @@ namespace VehicleRepairShop.Migrations.VehicleRepairShopIdentity
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<string>("Address");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -149,6 +149,10 @@ namespace VehicleRepairShop.Migrations.VehicleRepairShopIdentity
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -161,8 +165,6 @@ namespace VehicleRepairShop.Migrations.VehicleRepairShopIdentity
                         .HasMaxLength(256);
 
                     b.Property<string>("PasswordHash");
-
-                    b.Property<string>("Phone");
 
                     b.Property<string>("PhoneNumber");
 
@@ -188,6 +190,25 @@ namespace VehicleRepairShop.Migrations.VehicleRepairShopIdentity
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("VehicleRepairShop.Models.Vehicle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("AcceptedDate");
+
+                    b.Property<bool>("IsInShop");
+
+                    b.Property<string>("Make");
+
+                    b.Property<string>("Model");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Vehicle");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

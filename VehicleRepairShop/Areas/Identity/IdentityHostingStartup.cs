@@ -14,13 +14,10 @@ namespace VehicleRepairShop.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
-                services.AddDbContext<VehicleRepairShopIdentityContext>(options =>
-                    options.UseSqlServer(
-                        context.Configuration.GetConnectionString("VehicleRepairShopIdentityContextConnection")));
-
+            builder.ConfigureServices((context, services) => 
+            {
                 services.AddDefaultIdentity<User>()
-                    .AddEntityFrameworkStores<VehicleRepairShopIdentityContext>();
+                .AddEntityFrameworkStores<VehicleRepairShopContext>();
             });
         }
     }

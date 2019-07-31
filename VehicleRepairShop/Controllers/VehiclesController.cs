@@ -21,7 +21,7 @@ namespace VehicleRepairShop.Controllers
         // GET: Vehicles
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Vehicle.ToListAsync());
+            return View(await _context.Vehicle.Include(v => v.Owner).ToListAsync());
         }
 
         // GET: Vehicles/Details/5

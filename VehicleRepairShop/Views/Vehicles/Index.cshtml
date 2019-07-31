@@ -24,6 +24,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.IsInShop)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OwnerId)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -40,7 +43,10 @@
                 @Html.DisplayFor(modelItem => item.AcceptedDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsInShop)
+                @(item.IsInShop? "Yes": "No")
+            </td>
+            <td>
+                @(item.Owner.FirstName + " " + item.Owner.LastName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

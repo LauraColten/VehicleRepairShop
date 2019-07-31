@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,6 +12,11 @@ namespace VehicleRepairShop.Models
         public string Make { get; set; }
         public string Model { get; set; }
         public DateTime AcceptedDate { get; set; }
+        [Display(Name = "Currently in Shop")]
         public bool IsInShop { get; set; }
+
+        [Display(Name = "Owner")]
+        public string OwnerId { get; set; }
+        public User Owner { get; set; }
     }
 }

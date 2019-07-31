@@ -16,7 +16,17 @@ namespace VehicleRepairShop.Areas.Identity
         {
             builder.ConfigureServices((context, services) => 
             {
-                services.AddDefaultIdentity<User>()
+                services.AddDefaultIdentity<User>(options =>
+                {
+                    //Default password settings
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequiredUniqueChars = 1;
+                })
+        
                 .AddEntityFrameworkStores<VehicleRepairShopContext>();
             });
         }

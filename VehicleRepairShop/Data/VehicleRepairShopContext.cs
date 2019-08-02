@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using VehicleRepairShop.Models;
 
 namespace VehicleRepairShop.Models
 {
@@ -15,5 +16,9 @@ namespace VehicleRepairShop.Models
         }
 
         public DbSet<VehicleRepairShop.Models.Vehicle> Vehicle { get; set; }
+
+        public DbSet<VehicleRepairShop.Models.VehicleService> VehicleService { get; set; }
+
+        public DbSet<VehicleRepairShop.Models.Appointment> Appointment { get; set; }
     }
 }

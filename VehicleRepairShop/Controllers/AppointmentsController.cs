@@ -21,7 +21,7 @@ namespace VehicleRepairShop.Controllers
         // GET: Appointments
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Appointment.ToListAsync());
+            return View(await _context.Appointment.Include(v => v.Vehicle).Include(v => v.User).ToListAsync());
         }
 
         // GET: Appointments/Details/5

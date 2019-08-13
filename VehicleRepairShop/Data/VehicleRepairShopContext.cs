@@ -20,5 +20,7 @@ namespace VehicleRepairShop.Models
         public DbSet<VehicleRepairShop.Models.VehicleService> VehicleService { get; set; }
 
         public DbSet<VehicleRepairShop.Models.Appointment> Appointment { get; set; }
+
+        public DbSet<AppointmentVehicleServiceLink> AppointmentVehicleServiceLink { get; set; }
     }
 }

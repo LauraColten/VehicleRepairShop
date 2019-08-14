@@ -43,16 +43,16 @@
                 @Html.DisplayFor(modelItem => item.AcceptedDate)
             </td>
             <td>
-                @(item.IsInShop? "Yes": "No")
+                @(item.IsInShop ? "Yes" : "No")
             </td>
             <td>
                 @(item.Owner.FirstName + " " + item.Owner.LastName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
-                <a asp-controller="Appointments" asp-action="Create" asp-route-vehicleId="@item.Id">Create Appointment</a>
+                <button class="btn btn-info" onclick='@(Url.Action("Edit", "Vehicles", new { id = item.Id }))'>Edit</button>
+                <button class="btn btn-info" onclick='@(Url.Action("Details", "Vehicles", new { id = item.Id }))'>Details</button>
+                <button class="btn btn-danger" onclick='@(Url.Action("Delete", "Vehicles", new { id = item.Id }))'>Delete</button>
+                <button class="btn btn-info" onclick='@(Url.Action("Create Appointment", "Vehicles", new { id = item.Id }))'>Create Appointment</button>
             </td>
         </tr>
 }

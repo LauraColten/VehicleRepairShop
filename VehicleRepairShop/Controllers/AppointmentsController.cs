@@ -119,8 +119,9 @@ namespace VehicleRepairShop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ScheduledDate,VehicleId,UserId")] Appointment appointment)
+        public async Task<IActionResult> Edit(int id, DateTime scheduledDate) 
         {
+            var appointment = await _context.Appointment.FindAsync(id);
             if (id != appointment.Id)
             {
                 return NotFound();
@@ -130,6 +131,7 @@ namespace VehicleRepairShop.Controllers
             {
                 try
                 {
+                    appointment.ScheduledDate = scheduledDate;
                     _context.Update(appointment);
                     await _context.SaveChangesAsync();
                 }

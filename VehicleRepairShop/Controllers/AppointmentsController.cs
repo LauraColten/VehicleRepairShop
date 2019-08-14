@@ -34,7 +34,7 @@ namespace VehicleRepairShop.Controllers
 
             var appointment = await _context.Appointment
                 .Include(a => a.User)
-                .Include(v => v.Vehicle)
+                .Include(a => a.Vehicle)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (appointment == null)
             {

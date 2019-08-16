@@ -53,19 +53,19 @@ namespace VehicleRepairShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
+                //_context.Add(user);
+                //await _context.SaveChangesAsync();
 
-                foreach (var type in userTypes)
-                {
-                    _context.Add(new UserViewModel()
+                //foreach (var type in userTypes)
+                //{
+                    _context.Add(new User()
                     {
                         FirstName = user.FirstName,
                         LastName = user.LastName,
-                        EmailAddress = user.Email,
-                        Type = type
+                        Email = user.Email,
+                        TypeId = user.TypeId
                     });
-                }
+                //}
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

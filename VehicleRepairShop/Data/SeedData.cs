@@ -19,6 +19,12 @@ namespace VehicleRepairShop.Data
                 string UserId = null;
                 var userManager = serviceProvider.GetService<UserManager<User>>();
                 var userEmail = "admin@test.com";
+                var roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
+
+                if (!context.Roles.Any())
+                {
+                    var roleResult = await roleManager.CreateAsync(new IdentityRole() { Name = Constants.Roles.Admin });
+                }
 
 
                 if (!context.Users.Any())
@@ -38,7 +44,11 @@ namespace VehicleRepairShop.Data
                     }
                     user = await userManager.FindByEmailAsync(userEmail);
                     var userId = await userManager.GetUserIdAsync(user);
+
+                    await userManager.AddToRoleAsync(user, Constants.Roles.Admin);
                 }
+               // await userManager.AddToRoleAsync(await userManager.FindByEmailAsync(userEmail), Constants.Roles.Admin);
+
 
                 if (UserId == null)
                 {

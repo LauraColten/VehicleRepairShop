@@ -14,20 +14,27 @@ namespace VehicleRepairShop.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => 
+            builder.ConfigureServices((context, services) =>
             {
-                services.AddDefaultIdentity<User>(options =>
-                {
-                    //Default password settings
-                    options.Password.RequireDigit = false;
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireUppercase = false;
-                    options.Password.RequiredLength = 6;
-                    options.Password.RequiredUniqueChars = 1;
-                })
-        
-                .AddEntityFrameworkStores<VehicleRepairShopContext>();
+                //services.AddDefaultIdentity<User>(options =>
+                //{
+                //    //Default password settings
+                //    options.Password.RequireDigit = false;
+                //    options.Password.RequireLowercase = false;
+                //    options.Password.RequireNonAlphanumeric = false;
+                //    options.Password.RequireUppercase = false;
+                //    options.Password.RequiredLength = 6;
+                //    options.Password.RequiredUniqueChars = 1;
+                //})
+                //.AddRoles<IdentityRole>()
+                //.AddEntityFrameworkStores<VehicleRepairShopContext>();
+
+                services.AddIdentity<User, IdentityRole>()
+.AddRoleManager<RoleManager<IdentityRole>>()
+.AddDefaultUI()
+.AddDefaultTokenProviders()
+.AddEntityFrameworkStores<VehicleRepairShopContext>();
+
             });
         }
     }

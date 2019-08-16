@@ -29,7 +29,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr onclick="location.href = '@(Url.Action("Details", "Appointments", new { id = item.Id }))'">
+    <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.ScheduledDate)
             </td>
@@ -47,9 +47,12 @@
 
             </td>
             <td>
-                <button class="btn btn-info" onclick='@(Url.Action("Edit", "Appointments", new { id = item.Id }))'>Edit</button>
                 <button class="btn btn-info" onclick='@(Url.Action("Details", "Appointments", new { id = item.Id }))'>Details</button>
+                @if (User.IsInRole(Constants.Roles.Admin))
+                {
+                <button class="btn btn-info" onclick='@(Url.Action("Edit", "Appointments", new { id = item.Id }))'>Edit</button>
                 <button class="btn btn-danger" onclick='@(Url.Action("Delete", "Appointments", new { id = item.Id }))'>Delete</button>
+                }
             </td>
 
 </tr>

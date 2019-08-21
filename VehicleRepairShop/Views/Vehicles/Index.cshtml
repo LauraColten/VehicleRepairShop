@@ -49,12 +49,14 @@
                 @(item.Owner.FirstName + " " + item.Owner.LastName)
             </td>
             <td>
-                <button class="btn btn-info" onclick='@(Url.Action("Edit", "Vehicles", new { id = item.Id }))'>Edit</button>
-                <button class="btn btn-info" onclick='@(Url.Action("Details", "Vehicles", new { id = item.Id }))'>Details</button>
-                <button class="btn btn-danger" onclick='@(Url.Action("Delete", "Vehicles", new { id = item.Id }))'>Delete</button>
-                <button class="btn btn-info" onclick='@(Url.Action("Create Appointment", "Vehicles", new { id = item.Id }))'>Create Appointment</button>
+                <button class="btn btn-info" onclick="location.href='@(Url.Action("Edit", "Vehicles", new { id = item.Id }))'">Edit</button>
+                <button class="btn btn-info" onclick="location.href='@(Url.Action("Details", "Vehicles", new { id = item.Id }))'">Details</button>
+                <button class="btn btn-danger" onclick="location.href='@(Url.Action("Delete", "Vehicles", new { id = item.Id }))'">Delete</button>
+                <button class="btn btn-info" onclick="location.href='@(Url.Action("Create", "Appointments", new { vehicleId = item.Id }))'">Create Appointment</button>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+

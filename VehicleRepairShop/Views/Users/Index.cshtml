@@ -38,9 +38,9 @@
                 @Html.DisplayFor(modelItem => item.Type)
             </td>
             <td>
-                <button class="btn btn-info" onclick='@(Url.Action("Edit", "Appointments", new { id = item.Id }))'>Edit</button>
-                <button class="btn btn-info" onclick='@(Url.Action("Details", "Appointments", new { id = item.Id }))'>Details</button>
-                <button class="btn btn-danger" onclick='@(Url.Action("Delete", "Appointments", new { id = item.Id }))'>Delete</button>
+                <button class="btn btn-info" onclick="location.href='@(Url.Action("Edit", "Users", new { id = item.Id }))'">Edit</button>
+                <button class="btn btn-info" onclick="location.href='@(Url.Action("Details", "Users", new { id = item.Id }))'">Details</button>
+                <button class="btn btn-danger" onclick="location.href='@(Url.Action("Delete", "Users", new { id = item.Id }))'">Delete</button>
             </td>
         </tr>
         }

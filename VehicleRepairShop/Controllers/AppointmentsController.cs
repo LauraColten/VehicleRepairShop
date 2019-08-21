@@ -59,6 +59,7 @@ namespace VehicleRepairShop.Controllers
         // GET: Appointments/Create
         public async Task<IActionResult> Create(int vehicleId)
         {
+
             var vehicle = _context.Vehicle.Where(v => v.Id == vehicleId).First();
             var user = _context.Users.Where(u => u.Id == vehicle.OwnerId).First();
             var vehicleServices = await _context.VehicleService.ToListAsync();

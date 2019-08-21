@@ -22,20 +22,21 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PartList)
-            </td>
-            <td>
-                <button class="btn btn-info" onclick='@(Url.Action("Edit", "Appointments", new { id = item.Id }))'>Edit</button>
-                <button class="btn btn-info" onclick='@(Url.Action("Details", "Appointments", new { id = item.Id }))'>Details</button>
-                <button class="btn btn-danger" onclick='@(Url.Action("Delete", "Appointments", new { id = item.Id }))'>Delete</button>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PartList)
+                </td>
+                <td>
+                    <button class="btn btn-info" onclick="location.href='@(Url.Action("Edit", "VehicleServices", new { id = item.Id }))'">Edit</button>
+                    <button class="btn btn-info" onclick="location.href='@(Url.Action("Details", "VehicleServices", new { id = item.Id }))'">Details</button>
+                    <button class="btn btn-danger" onclick="location.href='@(Url.Action("Delete", "VehicleServices", new { id = item.Id }))'">Delete</button>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

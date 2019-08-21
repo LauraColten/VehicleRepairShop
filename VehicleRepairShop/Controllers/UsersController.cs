@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using VehicleRepairShop.Models;
 
@@ -11,10 +12,12 @@ namespace VehicleRepairShop.Controllers
     public class UsersController : Controller
     {
         private readonly VehicleRepairShopContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public UsersController(VehicleRepairShopContext context)
+        public UsersController(VehicleRepairShopContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
         // GET: Users
         public ActionResult Index()
@@ -35,9 +38,13 @@ namespace VehicleRepairShop.Controllers
             }).ToList();
         }
         // GET: Users/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            return View();
+            var user = _context.Users.FirstOrDefault(u => u.Id == id);
+            if (user == null)
+                throw new Exception();
+            var newUser = ConvertFromDatabase(new[] { user }).First();
+            return View(newUser);
         }
 
         // GET: Users/Create
@@ -49,27 +56,67 @@ namespace VehicleRepairShop.Controllers
         // POST: Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(User user, IEnumerable<UserType> userTypes)
+        public async Task<IActionResult> Create(UserViewModel user)
         {
-            if (ModelState.IsValid)
+            try
+            {
+                var newUser = new User()
+                {
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.EmailAddress,
+                    UserName = user.EmailAddress, 
+                    TypeId = (int)user.Type
+
+                };
+
+                var result = await _userManager.CreateAsync(newUser);
+                if (!result.Succeeded)
+                {
+                    throw new Exception();
+                }
+
+                var newRole = string.Empty;
+                switch(user.Type)
+                {
+                    case UserType.Administrator:
+                        newRole = Constants.Roles.Admin;
+                        break;
+                    case UserType.Technician:
+                        newRole = Constants.Roles.Tech;
+                        break;
+                    case UserType.User:
+                        newRole = Constants.Roles.User;
+                        break;
+                    default:
+                        break;
+                }
+                await _userManager.AddToRoleAsync(newUser, newRole);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+            //if (ModelState.IsValid)
             {
                 //_context.Add(user);
                 //await _context.SaveChangesAsync();
 
                 //foreach (var type in userTypes)
                 //{
-                    _context.Add(new User()
-                    {
-                        FirstName = user.FirstName,
-                        LastName = user.LastName,
-                        Email = user.Email,
-                        TypeId = user.TypeId
-                    });
+                    //_context.Add(new User()
+                    //{
+                    //    FirstName = user.FirstName,
+                    //    LastName = user.LastName,
+                    //    Email = user.Email,
+                    //    TypeId = user.TypeId
+                    //});
                 //}
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //await _context.SaveChangesAsync();
+                //return RedirectToAction(nameof(Index));
             }
-            return View(userTypes);
+            //return View();
         }
 
         // GET: Users/Edit/5

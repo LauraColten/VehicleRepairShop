@@ -9,7 +9,10 @@ namespace VehicleRepairShop
     {
         public static class Roles
         {
-            public static string Admin = "admin";
+            public static readonly string Admin = "admin";
+            public static readonly string Tech = "tech";
+            public static readonly string User = "user";
+
         }
     }
 }
